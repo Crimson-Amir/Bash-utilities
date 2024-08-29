@@ -36,7 +36,8 @@ main_list () {
   echo '3- Rathole 2'
   echo '4- Azumi Local Tunels'
   echo '5- Opiran Optimizer'
-  echo -e '6- Speed Test script\e[0m \n'
+  echo '6- Speed Test script'
+  echo -e '7-exit \e[0m \n'
   read -rp "Select Your choice: " user_choice
 }
 
@@ -54,6 +55,8 @@ main_menu () {
   then install_opiran_optimizer
   elif [[ $user_choice -eq 6 ]]
   then install_speedtest
+  elif [[ $user_choice -eq 7 ]]
+  then exit
   fi
 }
 
