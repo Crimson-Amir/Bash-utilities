@@ -32,3 +32,7 @@ send_to_telegram $SQLITE_FILE
 send_to_telegram $DB_BACKUP_FILE
 
 echo "Files sent to Telegram successfully."
+
+# scp /local/path/to/file username@server_ip:/root/backup/freebyte_db_backup.sql
+# pg_restore -U postgres -d freebyte /root/backup/freebyte_db_backup.sql
+# 0 0 * * * /root/backup.sh
