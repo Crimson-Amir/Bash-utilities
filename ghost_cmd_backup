@@ -1,0 +1,22 @@
+#!/bin/bash
+CHAT_ID="-1002115809340"
+MESSAGE_THREAD_ID="25166"
+BOT_TOKEN=""
+GHOST_DIR="/var/www/voidtrek"
+DB_PASS=""
+DB_USER="root"
+DB_NAME=""
+CURRENT_DATETIME=$(date +"%Y-%m-%d %H:%M:%S")
+
+DB_BACKUP="$GHOST_DIR/voidtrek_ghost_backup_mysql_.sql"
+CONTENT_BACKUP="$BACKUP_DIR/voidtrek_ghost_content.tar.gz"
+
+mysqldump -u $DB_USER -p$DB_PASS $DB_NAME > "$DB_BACKUP"
+
+tar -czvf "$CONTENT_BACKUP" "$GHOST_DIR/content"
+
+curl -F chat_id="$CHAT_ID" -F text="VoidTrek Backup: $CURRENT_DATETIME" -F message_thread_id="$MESSAGE_THREAD_ID" "https://api.telegram.org/bot$BOT_TOKEN/sendMessage"
+
+curl -F chat_id="$CHAT_ID" -F message_thread_id="$MESSAGE_THREAD_ID" -F document=@"$DB_BACKUP" "https://api.telegram.org/bot$BOT_TOKEN/sendDocument"
+
+curl -F chat_id="$CHAT_ID" -F message_thread_id="$MESSAGE_THREAD_ID" -F document=@"$CONTENT_BACKUP" "https://api.telegram.org/bot$BOT_TOKEN/sendDocument"
