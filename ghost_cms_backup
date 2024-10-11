@@ -9,7 +9,7 @@ DB_NAME=""
 CURRENT_DATETIME=$(date +"%Y-%m-%d %H:%M:%S")
 
 DB_BACKUP="$GHOST_DIR/voidtrek_ghost_backup_mysql_.sql"
-CONTENT_BACKUP="$BACKUP_DIR/voidtrek_ghost_content.tar.gz"
+CONTENT_BACKUP="$GHOST_DIR/voidtrek_ghost_content.tar.gz"
 
 mysqldump -u $DB_USER -p$DB_PASS $DB_NAME > "$DB_BACKUP"
 
